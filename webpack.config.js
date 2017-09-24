@@ -2,18 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const UglifyJsPlugin = new webpack.optimize.UglifyJsPlugin();
-const DefinePlugin = new webpack.DefinePlugin({
-"process.env": { 
-    NODE_ENV: JSON.stringify("production") 
-  }
-});
-const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './index.html',
-  filename: 'index.html',
-  inject: 'body'
-});
-
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: './index.js',
@@ -26,9 +14,17 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   plugins: [
-    UglifyJsPlugin,
-    HtmlWebpackPluginConfig,
-    DefinePlugin
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
+    }),
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      filename: 'index.html',
+      inject: 'body'
+    })
   ],
   module: {
     loaders: [
