@@ -1,23 +1,26 @@
 import React from 'react';
-import classNames from './HeaderStyles.js'
+import { Route, Switch, Redirect } from 'react-router-dom'
+import netflixAPI from '../../api'
+import cl from './HeaderStyles'
 
-import Search from '../search/Search.jsx'
-import FilmHeader from '../film-header/FilmHeader.jsx'
+import Search from '../search/Search'
+import FilmHeader from '../film-header/FilmHeader'
 
 export default class Header extends React.Component {
-  switchToSearch() {
-    this.props.selectedView = 'Search';
-    this.forceUpdate()
-  }
   render() {
     return (
-    <div className={classNames.headerContainer}>
-      <span className={classNames.spanColor}>netflixroulette</span>
-      <div className={classNames.blockContainer}>
-        <Search is={this.props.selectedView}></Search>
-        <FilmHeader is={this.props.selectedView} 
-                    item={this.props.selectedItem}
-                    switchView={this.switchToSearch.bind(this)}></FilmHeader>
+    <div className={cl.headerContainer}>
+      <span className={cl.spanColor}>netflixroulette</span>
+      <div className={cl.blockContainer}>
+        <Switch>
+          <Route path={"/search/"} render={(props) =>
+            <Search {...props} ></Search>
+          }/>
+          <Route path={`/film/:name`} render={(props) =>
+            <FilmHeader {...props} />
+          }/>
+          <Redirect from="/" to="/search/"/>
+        </Switch>
       </div>
     </div>);
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from './TypicalButtonStyles.js'
+import cl from './TypicalButtonStyles'
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -7,20 +7,21 @@ export default class Header extends React.Component {
     this.changeView = this.changeView.bind(this);
   };
   changeView() {
-    if (this.props.type == 'searchBack') {
-      this.props.switchView();
+    const nameButton = this.props.name.toLowerCase();
+    if (nameButton == 'title' || nameButton == 'director') {
+      this.props.searchType(nameButton);
     }
   };
   render() {
     let activeClass = '';
     let buttonClass = '';
     if (this.props.active) {
-      activeClass=classNames.active;
+      activeClass=cl.active;
     }
-    this.props.type=="typical" ? buttonClass=classNames.typical : buttonClass=classNames.search;
-    if (this.props.type=="searchBack") {buttonClass=classNames.searchBack}
+    this.props.type=="typical" ? buttonClass=cl.typical : buttonClass=cl.search;
+    if (this.props.type=="searchBack") {buttonClass=cl.searchBack}
     return (<button onClick={this.changeView}
-                    className={classNames.default + ' ' + buttonClass + ' ' + activeClass}>
+                    className={cl.default + ' ' + buttonClass + ' ' + activeClass}>
             {this.props.name}</button>);
   }
 }

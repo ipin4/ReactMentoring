@@ -8,7 +8,6 @@ export default ReactStyleSheets.createUniqueClassStyles({
     margin: '0 auto',
     padding: '0 5em',
     backgroundColor: 'rgb(245,245,245)',
-    color: 'black',
     fontWeight: 'bold'
   },
   rightRow: {
@@ -17,8 +16,5 @@ export default ReactStyleSheets.createUniqueClassStyles({
   buttons: {
     cursor: 'pointer',
     margin: '0 0 0 1.5em '
-  },
-  active: {
-    color: 'rgb(245,82,99)'
   }
 });

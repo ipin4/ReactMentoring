@@ -1,19 +1,19 @@
 import React from 'react';
-import classNames from './FilmItemStyles.js'
+import cl from './FilmItemStyles.js'
 
 export default class Header extends React.Component {
   render() {
     let filmInfo = this.props.filmData;
     return (<div>
-      <img className={classNames.image} 
+      <img className={cl.image} 
            width="100%" 
            height="250px" 
            src={'../../../data/' + filmInfo.img}/>
-      <div className={classNames.leftBox}>
-        <div className={classNames.name}>{filmInfo.name}</div>
-        <div className={classNames.genre}>{filmInfo.genre}</div>
+      <div className={cl.leftBox}>
+        <div className={cl.name}>{filmInfo.name}</div>
+        <div className={cl.genre}>{filmInfo.genre}</div>
       </div>
-      <span className={classNames.year}>{filmInfo.year}</span>
+      <span className={cl.year}>{filmInfo.year}</span>
     </div>);
   }
 }

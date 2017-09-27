@@ -2,9 +2,8 @@
 import ReactStyleSheets from 'react-style-sheets';
 
 export default ReactStyleSheets.createUniqueClassStyles({
-  common: {
-    fontFamily: '"Roboto", sans-serif',
-    fontSize: '14px',
-    width: '100%'
+  boxContainer: {
+    width: '80%',
+    margin: '2em auto 5em auto'
   }
 });
