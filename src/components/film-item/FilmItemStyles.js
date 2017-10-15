@@ -18,6 +18,11 @@ export default ReactStyleSheets.createUniqueClassStyles({
     fontSize: '16px',
     fontWeight: 'bold',
     textTransform: 'uppercase',
+    width: '120px',
+    overflow: 'hidden',
+    height: '16px',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis'
   },
   genre: {
     fontSize: '10px',

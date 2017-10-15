@@ -8,7 +8,7 @@ export default class Header extends React.Component {
   };
   changeView() {
     const nameButton = this.props.name.toLowerCase();
-    if (nameButton == 'title' || nameButton == 'director') {
+    if (nameButton == 'movies' || nameButton == 'tv shows') {
       this.props.searchType(nameButton);
     }
   };

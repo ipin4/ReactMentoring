@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import cl from './SearchStyles'
 import TypicalButton from '../typical-button/TypicalButton'
 import netflixAPI from '../../api'
+import store from '../store'
 
-export default class Header extends React.Component {
+export default class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
       active: true,
-      searchBy: 'name',
+      searchBy: 'movie',
       searchValue: ''
     };
     this.searchType = this.searchType.bind(this);
@@ -17,15 +18,15 @@ export default class Header extends React.Component {
     this.clearInput = this.clearInput.bind(this);
   };
   searchType(nameButton) {
-    if (nameButton == 'title') {
+    if (nameButton == 'movies') {
       this.setState({
         active: true,
-        searchBy: 'name'
+        searchBy: 'movie'
       });
     } else {
       this.setState({ 
         active: false,
-        searchBy: 'director'
+        searchBy: 'tv'
       })
     }
   }
@@ -51,17 +52,18 @@ export default class Header extends React.Component {
       <div className={cl.searchBy}>
         <span>SEARCH BY</span>
         <TypicalButton type="typical"
-                       name="TITLE"
+                       name="Movies"
                        active={this.state.active}
                        searchType={this.searchType}></TypicalButton>
         <TypicalButton type="typical"
-                       name="DIRECTOR"
+                       name="TV Shows"
                        active={!this.state.active}
                        searchType={this.searchType}></TypicalButton>
       </div>
       <div className={cl.search}>
         <Link to={{pathname: `/search/`,
-                   search: `${this.state.searchBy}=${this.state.searchValue}`}}>
+                   search: `query=${this.state.searchValue}`,
+                   hash: this.state.searchBy}}>
           <TypicalButton type="search" name="SEARCH"></TypicalButton>
         </Link>
       </div>

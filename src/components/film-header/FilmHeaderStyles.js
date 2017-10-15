@@ -24,7 +24,7 @@ export default ReactStyleSheets.createUniqueClassStyles({
   },
   whiteText: {
     fontWeight: '400',
-    color: 'white',
+    color: '#bdbdbd',
     margin: '1em 2em 2em 0',
     display: 'inline-block'
   },

@@ -32,8 +32,20 @@ module.exports = {
   ],
   module: {
     loaders: [
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/ ,
+        query: {
+          presets:[ 'es2015', 'react', 'stage-2' ]
+        },
+      },
+      { test: /\.jsx$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/ ,
+        query: {
+          presets:[ 'es2015', 'react', 'stage-2' ]
+        },
+      },
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader']})

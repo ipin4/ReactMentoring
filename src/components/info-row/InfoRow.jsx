@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom'
+
+import { changeSortType } from '../actions/actions.js'
 import cl from './InfoRowStyles'
 import netflixAPI from '../../api'
 
@@ -20,10 +22,12 @@ export default class Header extends React.Component {
       sortBy = 'raiting';
       this.setState({ active: false });
     }
-    this.props.sortCollection.call(this, sortBy);
+    changeSortType(sortBy)(this.props.store);
   }
   render() {
     const self = this;
+    const films = this.props.films;
+    const searchParams = this.props.searchParams;
     let style = {
       true: {
         color: 'rgb(245,82,99)'
@@ -34,7 +38,13 @@ export default class Header extends React.Component {
     }
     return (
     <div className={cl.infoRow}>
-      <span>{this.props.itemsLength} movies found</span>
+      { searchParams || films.length && films[0].id ?
+          this.props.isRelated ?
+            <span>Similar movies: {films.length}</span> :
+            <span>{films.length} movies found</span> :
+        <span>No movies found</span>
+      }
+      
       <div className={cl.rightRow}>
         <span>Sort by: </span>
           <span style={style[this.state.active]} className={cl.buttons}
