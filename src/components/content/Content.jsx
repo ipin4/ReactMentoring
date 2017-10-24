@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { Link, Route, Redirect } from 'react-router-dom'
 
-import { fetchData, fetchRecom } from '../actions/actions.js'
+import { fetchData, fetchRecom } from '../../actions/actions.js'
 
 import netflixAPI from '../../api'
 

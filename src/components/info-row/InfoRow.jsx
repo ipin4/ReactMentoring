@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom'
 
-import { changeSortType } from '../actions/actions.js'
+import { changeSortType } from '../../actions/actions.js'
 import cl from './InfoRowStyles'
 import netflixAPI from '../../api'
 

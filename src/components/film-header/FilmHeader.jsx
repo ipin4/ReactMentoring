@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { fetchById } from "../actions/actions.js"
+import { fetchById } from "../../actions/actions.js"
 import netflixAPI from '../../api'
 
 import cl from './FilmHeaderStyles';
