@@ -1,103 +1,68 @@
 import React, { PropTypes, Component } from 'react';
 import { Link, Route, Redirect } from 'react-router-dom'
 
-import { fetchData, fetchRecom } from '../../actions/actions.js'
+import { connect } from "react-redux";
+import { fetchFilms, fetchRecom } from '../../actions/actions.js'
 
-import netflixAPI from '../../api'
-
-import InfoRow from '../info-row/InfoRow'
 import FilmItem from '../film-item/FilmItem'
-
 import cl from './ContentStyles'
 import filmCl from '../film-item/FilmItemStyles'
 
-export default class Header extends Component {
+class Content extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      searchParams: '',
-      itemType: ''
-    };
+    this.state = {data: '', itemType: ''};
     this.sortCollection = this.sortCollection.bind(this);
-    this.sendRequest = this.sendRequest.bind(this);
-    this.sendRecomRequest = this.sendRecomRequest.bind(this);
   };
-  sortCollection(store) {
-    if (store.sortBy == 'year') {
-      store.content.films.sort(function (a, b) {
+
+  sortCollection(sortBy, films) {
+    sortBy == 'year' ?
+      films.sort((a, b) => {
         const itemA = a.release_date || a.first_air_date || '0';
         const itemB = b.release_date || b.first_air_date || '0';
-        return itemB.replace(/-/g, '')
-          - itemA.replace(/-/g, '');
-      });
-    } else {
-      store.content.films.sort(function (a, b) {
-        return b.vote_average - a.vote_average;
-      });
-    }
+        return itemB.replace(/-/g, '') - itemA.replace(/-/g, '');
+      }) : films.sort((a, b) => b.vote_average - a.vote_average);
   };
-  sendRequest(searchParams, itemType, store) {
-    const data = searchParams
-      .replace(/\s/ig, "%20");
-    fetchData(data, itemType)(store)
-  }
-  sendRecomRequest(searchParams, itemType, store) {
-    fetchRecom(searchParams, itemType)(store);
-  }
+
   render() {
-    const { store } = this.props;
-    const films = store.content.films;
-    let searchParams;
-    let itemType;
-    let isRelated;
-    if (store.location.search) {
-      searchParams = store.location.search.replace('?', '');
-      itemType = store.location.hash.replace('#', '');
-      isRelated = false;
-    } else {
-      const locationData =
-        store.location.pathname.replace('/film/','').split('/')
-      searchParams = locationData[0];
-      itemType = locationData[1];
-      isRelated = true;
+    const { films, sortBy, searchParams } = this.props;
+    const { data, itemType, page } = this.props.match.params;
+
+    if (data !== this.state.data || itemType !== this.state.itemType) {
+      this.setState({ data: data, itemType: itemType });
+      page === 'search' ?
+        this.props.fetchFilms(data, itemType) :
+        this.props.fetchRecom(data, itemType);
     }
-    
-    if (searchParams !== this.state.searchParams ||
-        itemType !== this.state.itemType) {
-      this.setState({
-        searchParams: searchParams,
-        itemType: itemType
-      })
-      if (store.location.search) {
-        this.sendRequest(searchParams, itemType, store);
-      } else {
-        this.sendRecomRequest(searchParams, itemType, store);
-      }
-    }
-    this.sortCollection(store);
-    return (
-      <div>
-        <InfoRow films={films}
-                 sortBy={this.state.sortBy}
-                 store={store}
-                 searchParams = {searchParams}
-                 isRelated={isRelated}/>
-        <div className={cl.boxContainer}>
-          {searchParams || films.length && films[0].id ?
-            films.map((item, index) =>
-              <Link to={`/film/${item.id}/${itemType}`}>
-                <div className={filmCl.container}>
-                  <FilmItem filmData={item}/>
-                </div>
-              </Link>
-            ) : <div></div>
-          }
-        </div>
-      </div>
-    );
+
+    this.sortCollection(sortBy, films);
+    return <div className={cl.boxContainer}>
+      { films.length && films[0].id ?
+        films.map((item, index) =>
+          <Link key={item.id} to={`/film/${item.id}/${itemType}`}>
+            <div className={filmCl.container}>
+              <FilmItem filmData={item}/>
+            </div>
+          </Link>) : <div></div> }
+    </div>
   }
 }
 
-Header.propTypes = {
-  films: PropTypes.object.isRequired
+function mapStateToProps (state) {
+  return {
+    films: state.fetchReducer.films,
+    sortBy: state.sortReducer.sortBy,
+    searchParams: state.searchReducer.searchParams
+  }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchFilms: (data, itemType) =>
+      dispatch(fetchFilms(data, itemType)),
+    fetchRecom: (data, itemType) =>
+      dispatch(fetchRecom(data, itemType))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Content);

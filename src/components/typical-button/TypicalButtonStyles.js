@@ -28,5 +28,13 @@ export default ReactStyleSheets.createUniqueClassStyles({
   searchBack: {
     color: 'rgb(245,82,99)',
     backgroundColor: 'white'
+  },
+  searchDisable: {
+    lineHeight: '3em',
+    height: '3em',
+    padding: '0 3.5em',
+    backgroundColor: 'rgba(245,82,99,.5)',
+    color: 'rgba(255,255,255,.5)',
+    pointerEvents: 'none'
   }
 });

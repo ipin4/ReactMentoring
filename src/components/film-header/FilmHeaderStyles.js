@@ -14,6 +14,10 @@ export default ReactStyleSheets.createUniqueClassStyles({
     height: 'auto',
     float: 'right'
   },
+  leftContainer: {
+    width:'30%',
+    display: 'inline-block'
+  },
   button: {
     position: 'absolute',
     top: '-3.7em',

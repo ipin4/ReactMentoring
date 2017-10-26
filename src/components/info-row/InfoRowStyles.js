@@ -16,5 +16,10 @@ export default ReactStyleSheets.createUniqueClassStyles({
   buttons: {
     cursor: 'pointer',
     margin: '0 0 0 1.5em '
+  },
+  active: {
+    cursor: 'pointer',
+    margin: '0 0 0 1.5em ',
+    color: 'rgb(245,82,99)'
   }
 });

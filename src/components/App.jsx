@@ -1,39 +1,19 @@
 import React, { Component } from 'react';
-import { Link, Match, Route } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-
-import netflixAPI from '../api';
+import { Route, withRouter } from 'react-router-dom';
 
 import Header from './header/Header';
 import Content from './content/Content';
 import Footer from './footer/Footer';
+import InfoRow from './info-row/InfoRow';
 
 import comCl from './AppStyles';
-import css from '../default';
 
-class App extends Component {
-  render() {
-    const store = this.props
-    const { content } = this.props;
-    return (
-      <div className={comCl.common}>
-        <Header store={store}/>
-        <Route path="/search/:name">
-          <Content store={store}/>
-        </Route>
-        <Footer></Footer>
-      </div>
-    );
-  };
-}
+export default withRouter(() =>
+  <div className={comCl.common}>
+    <Header/>
+    <Route path={"/:page"} component={InfoRow}/>
+    <Route path="/:page/:data/:itemType" component={Content}/>
+    <Footer/>
+  </div>
+);
 
-function mapStateToProps (state) {
-  return {
-    content: state.fetchReducer.content,
-    filmData: state.fetchByIdReducer.filmData,
-    sortBy: state.sortReducer.sortBy,
-  }
-}
-
-export default connect(mapStateToProps)(App)

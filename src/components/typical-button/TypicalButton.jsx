@@ -13,15 +13,10 @@ export default class Header extends React.Component {
     }
   };
   render() {
-    let activeClass = '';
-    let buttonClass = '';
-    if (this.props.active) {
-      activeClass=cl.active;
-    }
-    this.props.type=="typical" ? buttonClass=cl.typical : buttonClass=cl.search;
-    if (this.props.type=="searchBack") {buttonClass=cl.searchBack}
-    return (<button onClick={this.changeView}
-                    className={cl.default + ' ' + buttonClass + ' ' + activeClass}>
-            {this.props.name}</button>);
+    const activeClass = this.props.active ? cl.active : '';
+    return <button
+      onClick={this.changeView}
+      className={cl.default + ' ' + cl[this.props.type] + ' ' + activeClass}>
+      {this.props.name}</button>
   }
 }

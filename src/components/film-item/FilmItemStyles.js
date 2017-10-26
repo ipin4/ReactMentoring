@@ -9,16 +9,17 @@ export default ReactStyleSheets.createUniqueClassStyles({
     display: 'inline-block'
   },
   image: {
-    marginBottom: '1em'
+    marginBottom: '1em',
+    width: '100%'
   },
   leftBox: {
+    width: '100%',
     display: 'inline-block'
   },
   name: {
     fontSize: '16px',
     fontWeight: 'bold',
     textTransform: 'uppercase',
-    width: '120px',
     overflow: 'hidden',
     height: '16px',
     whiteSpace: 'nowrap',
