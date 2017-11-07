@@ -1,40 +1,28 @@
 const path = 'https://api.themoviedb.org/3/';
 const key = 'api_key=e1b5752947f72bf59d881b313cb84177';
 
-function fetchSeveralFilms(url, dispatch, howMuch) {
-  fetch(url)
-    .then(response => response.json())
-    .then(response => {
-      howMuch == 'several' ?
-      dispatch(fetchFilmsSuccess(response)) :
-      dispatch(fetchOneFilmDataSuccess(response));
-    })
-    .catch(errors => {
-      howMuch == 'several' ?
-      dispatch(fetchFilmsErrors(errors)) :
-      dispatch(fetchOneFilmDataError(response));
-    })
-}
-
 export function fetchFilms(data, itemType) {
-  return dispatch => fetchSeveralFilms(
-    `${path}search/${itemType}?${key}&query=${data}&page=1`,
-    dispatch,
-    'several')
+  const url = `${path}search/${itemType}?${key}&query=${data}&page=1`;
+  return dispatch => fetch(url)
+    .then(response => response.json())
+    .then(response => dispatch(fetchFilmsSuccess(response)))
+    .catch(errors => dispatch(fetchFilmsErrors(errors)))
 }
 
 export function fetchRecom(data, itemType) {
-  return dispatch => fetchSeveralFilms(
-    `${path + itemType}/${data}/similar?${key}&page=1`,
-    dispatch,
-    'several')
+  const url = `${path + itemType}/${data}/similar?${key}&page=1`
+  return dispatch => fetch(url)
+    .then(response => response.json())
+    .then(response => dispatch(fetchFilmsSuccess(response)))
+    .catch(errors => dispatch(fetchFilmsErrors(errors)))
 }
 
 export function fetchById(params) {
-  return dispatch => fetchSeveralFilms(
-    `${path + params.itemType}/${params.data}?${key}`,
-    dispatch,
-    'one')
+  const url = `${path + params.itemType}/${params.data}?${key}`;
+  return dispatch => fetch(url)
+    .then(response => response.json())
+    .then(response => dispatch(fetchOneFilmDataSuccess(response)))
+    .catch(errors => dispatch(fetchOneFilmDataError(response)))
 }
 
 export function fetchFilmsSuccess(response) {
