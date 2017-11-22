@@ -1,8 +1,8 @@
 import React from 'react';
-import cl from './FooterStyles'
-import headerCl from '../header/HeaderStyles'
+import ftst from './Footer.css'
+import hdst from '../header/Header.css'
 
 export default () =>
-  <div className={cl.footer}>
-    <span className={headerCl.spanColor}>netflixroulette</span>
+  <div className={ftst.tile}>
+    <span className={hdst.spanColor}>netflixroulette</span>
   </div>

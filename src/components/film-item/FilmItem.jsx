@@ -1,5 +1,5 @@
 import React from 'react';
-import cl from './FilmItemStyles.js'
+import cl from './FilmItem.css'
 
 export default class Header extends React.Component {
   render() {

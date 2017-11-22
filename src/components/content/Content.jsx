@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import { fetchFilms, fetchRecom } from '../../actions/actions.js'
 
 import FilmItem from '../film-item/FilmItem'
-import cl from './ContentStyles'
-import filmCl from '../film-item/FilmItemStyles'
+import cl from './Content.css'
+import filmCl from '../film-item/FilmItem.css'
 
 class Content extends Component {
   constructor(props) {

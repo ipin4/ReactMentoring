@@ -3,7 +3,7 @@ import { Link, Route } from 'react-router-dom'
 import { connect } from "react-redux";
 
 import { changeSortType } from '../../actions/actions.js'
-import cl from './InfoRowStyles'
+import cl from './InfoRow.css'
 
 class InfoRow extends React.Component {
   render() {

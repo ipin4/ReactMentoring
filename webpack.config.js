@@ -28,7 +28,10 @@ module.exports = {
       filename: 'index.html',
       inject: 'body'
     }),
-    new ExtractTextPlugin('[name].css'),
+    new ExtractTextPlugin({
+      filename: '[name].css',
+      allChunks: true
+    })
   ],
   module: {
     loaders: [
@@ -48,8 +51,18 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader']})
-      }
+        loader: ExtractTextPlugin.extract({
+          loader: [
+            {
+              loader: 'css-loader',
+              query: {
+                localIdentName: '[hash:8]',
+                modules: true
+              }
+            }
+          ]
+        })
+      },
     ]
   },
   watch: true

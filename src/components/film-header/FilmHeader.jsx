@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { fetchById } from "../../actions/actions.js"
 
-import cl from './FilmHeaderStyles';
+import cl from './FilmHeader.css';
 import TypicalButton from '../typical-button/TypicalButton';
 
 class FilmHeader extends React.Component {
@@ -50,7 +50,7 @@ class FilmHeader extends React.Component {
           </div>
         </div>
         <div className={cl.button}>
-          <Link to={'/search'}>
+          <Link to={'/'}>
             <TypicalButton type="searchBack" name="SEARCH"/>
           </Link>
         </div>

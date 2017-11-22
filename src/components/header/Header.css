@@ -1,0 +1,13 @@
+.headerContainer {
+  padding: 1.5em 5em 2em 5em;
+  height: auto;
+  background-color: rgba(0,0,0,.9);
+  color: white;
+}
+.blockContainer {
+  margin-top: 2em;
+}
+.spanColor {
+  display: block;
+  color: rgb(245, 82, 99);
+}

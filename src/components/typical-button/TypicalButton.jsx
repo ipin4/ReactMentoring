@@ -1,5 +1,5 @@
 import React from 'react';
-import cl from './TypicalButtonStyles'
+import cl from './TypicalButton.css'
 
 export default class Header extends React.Component {
   constructor(props) {

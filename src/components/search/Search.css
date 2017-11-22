@@ -1,0 +1,23 @@
+.headerContainer {
+  width: 80%;
+  margin: 0 auto;
+  color: white;
+}
+.input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  line-height: 3.8em;
+  margin: 0 0 2em 0;
+  padding: 0 2em;
+  background-color: black;
+  color: white;
+  border: 0px;
+  border-bottom: solid .2em rgb(245,82,99);
+}
+.searchBy {
+  display: inline-block
+}
+.search {
+  float: right;
+}

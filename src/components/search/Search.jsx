@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
-import cl from './SearchStyles'
+import cl from './Search.css'
 import TypicalButton from '../typical-button/TypicalButton'
 
 export default class Search extends Component {
