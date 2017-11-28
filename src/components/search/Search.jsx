@@ -40,7 +40,7 @@ export default class Search extends Component {
           active={this.state.searchBy == 'tv'}
           searchType={this.searchType}/>
       </div>
-      <div className={cl.search}>
+      <div className={cl.toRight}>
         { this.state.searchValue ?
           <Link to={`/search/${this.state.searchValue.toLowerCase()}/${this.state.searchBy}`}>
             <TypicalButton type="search" name="SEARCH"/>

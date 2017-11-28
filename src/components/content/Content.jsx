@@ -16,6 +16,7 @@ class Content extends Component {
   };
 
   sortCollection(sortBy, films) {
+    if (!films) return;
     sortBy == 'year' ?
       films.sort((a, b) => {
         const itemA = a.release_date || a.first_air_date || '0';
@@ -24,20 +25,34 @@ class Content extends Component {
       }) : films.sort((a, b) => b.vote_average - a.vote_average);
   };
 
+  static fetchData(dispatch, match) {
+    const { data, itemType, page } = match.params;
+    if (page === 'search') {
+      return dispatch(fetchFilms(data, itemType));
+    } else {
+      return dispatch(fetchRecom(data, itemType));
+    }
+  }
+
+  componentDidMount() {
+    const { data, itemType, page } = this.props.match.params;
+    page === 'search' ?
+        this.props.fetchFilms(data, itemType) :
+        this.props.fetchRecom(data, itemType);
+  }
+
   render() {
     const { films, sortBy, searchParams } = this.props;
     const { data, itemType, page } = this.props.match.params;
-
     if (data !== this.state.data || itemType !== this.state.itemType) {
       this.setState({ data: data, itemType: itemType });
       page === 'search' ?
         this.props.fetchFilms(data, itemType) :
         this.props.fetchRecom(data, itemType);
     }
-
     this.sortCollection(sortBy, films);
     return <div className={cl.boxContainer}>
-      { films.length && films[0].id ?
+      { !!films && films.length && films[0].id ?
         films.map((item, index) =>
           <Link key={item.id} to={`/film/${item.id}/${itemType}`}>
             <div className={filmCl.container}>

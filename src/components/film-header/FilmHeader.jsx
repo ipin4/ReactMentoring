@@ -18,15 +18,23 @@ class FilmHeader extends React.Component {
     return data.map(item => item.name).join(', ');
   }
 
+  static fetchData(dispatch, match) {
+    return dispatch(fetchById(match.params))
+  }
+
+  componentDidMount() {
+    const { params } = this.props.match;
+    this.props.fetchById(params);
+  }
+
   render() {
     const { filmData } = this.props;
     const { params } = this.props.match;
-
     if (params.data !== this.state.filmId) {
-      this.setState({filmId: params.data})
+      this.setState({ filmId: params.data })
       this.props.fetchById(params);
     }
-  
+
     return (
       <div className={cl.filmContainer + ' clearfix'}>
         <div className={cl.leftContainer}>

@@ -10,12 +10,15 @@ import {
 import history from './history'
 
 import App from './components/App';
-import store from "./store.js";
+import getStoreConfig from "./store.js";
+
+const store = getStoreConfig(window.PRELOADED_STATE);
+delete window.PRELOADED_STATE;
 
 render(
   <Router history={history}>
     <Provider store={store}>
-      <Route path="/" component={App}/>
+      <App/>
     </Provider>
   </Router>
 , document.getElementById('root'));

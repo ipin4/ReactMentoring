@@ -11,7 +11,7 @@ class InfoRow extends React.Component {
     return (
       <div className={cl.infoRow}>
         {
-          films.length && films[0].id &&
+          !!films && films.length && films[0].id &&
           this.props.location.pathname != '/search' ?
             this.props.match.params.page === 'film' ?
               <span>Similar movies: {films.length}</span> :
@@ -22,11 +22,11 @@ class InfoRow extends React.Component {
         <div className={cl.rightRow}>
           <span>Sort by: </span>
           <span
-            className={sortBy == 'year' ? cl.active : cl.buttons}
+            className={sortBy == 'year' ? cl.rowActive : cl.buttons}
             onClick={this.props.changeSortType.bind(this, 'year')}>
             release date</span>
           <span
-            className={sortBy == 'raiting' ? cl.active : cl.buttons}
+            className={sortBy == 'raiting' ? cl.rowActive : cl.buttons}
             onClick={this.props.changeSortType.bind(this, 'raiting')}>
             raiting</span>
         </div>
